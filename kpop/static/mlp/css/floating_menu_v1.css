@@ -1,0 +1,99 @@
+/* quick */
+.mq_wrap {
+    position: fixed;
+	right: 20px;
+	bottom: 20px;
+	z-index: 60;
+	display: block;
+	flex-direction: column;
+}
+.mq_wrap.show {
+	display: flex;
+}
+.mq_wrap .qr .tooltip {
+	color: #fb0101;
+	font-size: 13px;
+	font-weight: bold;
+	margin: 20px 0 0 10px;
+	display: none;
+}
+.mq_wrap .qr {
+	display: flex;
+	margin-bottom: 10px;
+}
+.mq_wrap .qr:hover .tooltip {
+	display: none;
+}
+.mq_wrap .qr i {
+	display: inline-block;
+	width: 81px;
+	height: 81px;
+	background-size: 100% 100%;
+}
+.mq_wrap .btn_talk {
+	background: url(https://kpop.datamine.co.kr/static/mlp/img23/q_07.png) no-repeat 0 0;
+	display: inline-block;
+	width: 81px;
+	height: 81px;
+	background-size: 100% 100%;
+	margin-bottom: 10px;
+}
+.mq_wrap .btn_talk.scroll_talk {
+	position: relative;
+	right: auto;
+	bottom: auto;
+}
+
+.mq_wrap .btn_top {
+	background: url(https://kpop.datamine.co.kr/static/mlp/img23/q_01.png) no-repeat 0 0;
+	/* display: inline-block; */
+	width: 81px;
+	height: 81px;
+	background-size: 100% auto;
+}
+.mq_wrap .btn_top p{
+	display: none;
+}
+.mq_wrap .btn_top.show {
+	display: block;
+}
+.show_talk.nm {
+	bottom: 215px;
+}
+.show_talk.active .pf_clise {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	cursor: pointer;
+}
+.show_talk.active .pf_clise img {
+	width: 90%;
+}
+.scroll_talk.btn_talk.active {
+	background: url(https://kpop.datamine.co.kr/static/mlp/img23/q_07.png) no-repeat 0 0;
+	display: inline-block;
+	width: 81px;
+	height: 81px;
+	background-size: 100% auto;
+}
+.scroll_talk.btn_talk button {
+	width: 59px;
+	height: 59px;
+	background-size: 100% 100%;
+}
+/* �뚮줈�� 硫붾돱 �ъ씠利� */
+.mobile .scroll_talk.btn_talk {
+	width: 59px;
+	height: 59px;
+	background-size: 100% 100%;
+}
+.mobile .mq_wrap .qr i{
+	width: 59px;
+	height: 59px;
+	background-size: 100% 100% !important;
+}
+.mobile .mq_wrap .btn_top{
+	width: 59px;
+	height: 59px;
+	background-size: 100% 100% !important;
+}
