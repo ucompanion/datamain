@@ -38,6 +38,7 @@
         setInnerHeight();
         $(window).on("resize", setInnerHeight);
     </script>
+
 </head>
 
 <body>
@@ -178,9 +179,23 @@
                         </ul>
                     </div>
 
+                    <!-- Case 로그인후 -->
                     <div class="lnb_utils">
-                        <a href="/login" class="btn">로그인</a>
-                        <a href="/register" class="btn">회원가입</a>
+                        <a href="/dashboard" class="btn pc_only" onclick="maskShow()">나의 강좌</a>
+                        <div class="alarm_header">
+                            <button type="button" class="btn" onclick="alarm_func.showAlarm();">알림함</button>
+                        </div>
+                        <!-- <a href="/account/settings" class="bar"><i class="ic_bu"></i>마이페이지</a> -->
+                        <div class="mypage_w">
+                            <button type="button" class="btn bt_open">마이페이지</button>
+                            <div class="layer_box">
+                                <ul>
+                                    <li><a href="/dashboard">나의 강좌</a></li>
+                                    <li><a href="/account/settings">계정 설정</a></li>
+                                    <li><a href="/logout?next=/">로그아웃</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
 
                     <button type="button" class="btn_menu" aria-label="모바일메뉴"></button>
@@ -189,16 +204,29 @@
             </div>
             <!-- e:lnb -->
 
+            <!-- 2026 메인리뉴얼 -->
             <!-- s:모바일일때  -->
             <div class="lnbm_wrap">
                 <div class="mobile_utils">
-                    <a href="/login" class="btn">로그인</a>
-                    <a href="/register" class="btn">회원가입</a>
+                    <a href="/dashboard" class="btn pc_only" onclick="maskShow()">나의 강좌</a>
+                    <div class="alarm_header">
+                        <button type="button" class="btn" onclick="alarm_func.showAlarm();">알림함</button>
+                    </div>
                     <a href="javascript:;" class="btn_close">팝업닫기</a>
                 </div>
-
                 <div class="mobile_list">
                     <ul class="">
+                        <!-- 로그인 후에만 마이페이지 메뉴 적용 -->
+                        <li class="has_menu dep2">
+                            <a href="javascript:void(0);" class="menu">마이페이지</a>
+                            <div class="sub wide">
+                                <ul>
+                                    <li><a href="/dashboard">나의 강좌</a></li>
+                                    <li><a href="/account/settings">계정 설정</a></li>
+                                    <li><a href="/logout?next=/">로그아웃</a></li>
+                                </ul>
+                            </div>
+                        </li>
                         <li class="has_menu dep2">
                             <!-- <a href="/courses" class="menu">모든 강좌</a> -->
                             <a href="javascript:void(0);" class="menu">모든 강좌</a>
@@ -308,19 +336,61 @@
                         <a href="https://www.youtube.com/channel/UCB4MbYcHYQcf-al_21aIg7A" target="_blank" class="btn_yt">유튜브</a>
                     </div>
                     <!--(D) 모바일일때 로그아웃버튼 여기에 추가 -->
+
+
+                    <div class="mobile_logout">
+                        <a href="/logout?next=/">로그아웃</a>
+                    </div>
                 </div>
             </div>
             <!-- e:모바일일때 -->
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // 공통으로 사용할 레이어 선택자
+                    const layerSelector = '.family_w, .mypage_w';
+
+                    document.body.addEventListener('click', function (e) {
+                        const allLayers = document.querySelectorAll(layerSelector);
+                        const openBtn = e.target.closest('.bt_open');
+                        const closeBtn = e.target.closest('.bt_close');
+                        const clickedLayer = e.target.closest(layerSelector);
+
+                        // 열기 버튼(.bt_open)을 클릭한 경우
+                        if (openBtn) {
+                            const parentLayer = openBtn.closest(layerSelector);
+                            const wasOpen = parentLayer.classList.contains('open');
+                            // 모든 레이어를 먼저 닫습니다.
+                            allLayers.forEach(layer => layer.classList.remove('open'));
+                            // 토글
+                            if (!wasOpen) {
+                                parentLayer.classList.add('open');
+                            }
+                        } else if (closeBtn || !clickedLayer) {
+                            // 닫기 버튼을 클릭했거나, 레이어 외부를 클릭한 경우
+                            allLayers.forEach(layer => layer.classList.remove('open'));
+                        }
+                    });
+                    // 각 레이어에 mouseleave 이벤트 추가
+                    const allLayersForEvents = document.querySelectorAll(layerSelector);
+                    let closeTimer;
+                    allLayersForEvents.forEach(layer => {
+                        layer.addEventListener('mouseenter', () => {
+                            clearTimeout(closeTimer);
+                        });
+                        layer.addEventListener('mouseleave', () => {
+                            closeTimer = setTimeout(() => {
+                                layer.classList.remove('open');
+                            }, 200);
+                        });
+                    });
+                });
+            </script>
         </div>
 
-
-
-
         <!-- 알림창 S -->
-
         <div class="layer_wrap alarm">
             <div class="layer_box"> <strong class="layer_title ac">알림함</strong>
-
                 <div class="content">
                     <ul>
                     </ul>
@@ -332,6 +402,57 @@
                 <button type="button" class="btn_layer_close" onclick="alarm_func.closeAlarm();">창닫기</button>
             </div>
         </div>
+        <script>
+            var alarm_func = {
+                showAlarm: function () {
+                    $(".alarm_header button").removeClass("ic_new");
+                    //$(".boxing").removeClass('active');
+                    $(".overlay").css('display', 'none');
+                    admin.layerOpen('.layer_wrap.alarm');
+
+                    let li_arr = new Array();
+                    $(".layer_wrap.alarm .al_li").each(function () {
+                        li_arr.push($(this).data('id'))
+                    });
+
+                    if (li_arr.length > 0) {
+                        alarm_func.updateAlarm(li_arr, 1)
+                    }
+                },
+                closeAlarm: function () {
+                    $(".window-wrap.wrap").removeClass('block');
+                    $(".window-wrap.wrap").css('overflow-y', 'auto');
+                    $(".al_txt .text").addClass('read')
+                    admin.layerClose();
+                },
+                updateAlarm: function (data, status) {
+                    $.post(
+                        '/alarm/alarmStatus',
+                        {
+                            event_data: String(data),
+                            status: status,
+                            csrfmiddlewaretoken: "SObPVgRiOVFNuIDd2qI7uwnPyLd1V3QhryPrXx2Kin3Ws8Z5cawj8oIOotJOz95S"
+                        },
+                    )
+                        .success(function (res) {
+                            if (res.status != "1") {
+                                alert("오류가 발생하였습니다.\n잠시후 다시 시도해주세요.");
+                            }
+                        })
+                        .error(function () {
+                            alert("오류가 발생하였습니다.\n잠시후 다시 시도해주세요.");
+                        });
+                },
+                removeAlarm: function (data) {
+                    alarm_func.updateAlarm($(data).parents('li').data('id'), 2)
+                    $(data).parents('li').remove();
+                    if ($(".al_li").length == 0) {
+                        $(".al_status").css('display', 'block');
+                    }
+                }
+            }
+        </script>
+        <!-- 알림창 E -->
 
         <!-- 가입안내창 S -->
         <div class="layer_wrap register">
@@ -442,13 +563,13 @@
 
                     if ($this.hasClass("show") && $sub.is(":visible")) {
                         // 이미 열려있으면 닫기
-                        $sub.slideUp('fast');
+                        $sub.slideUp();
                         $this.removeClass("show");
                     } else {
                         // 닫혀있으면 다른 메뉴 닫고, 자신은 열기
                         $(".has_menu.dep2").removeClass("show");
-                        $(".has_menu.dep2 .sub").slideUp('fast');
-                        $sub.slideDown('fast');
+                        $(".has_menu.dep2 .sub").slideUp();
+                        $sub.slideDown();
                         $this.addClass("show");
                     }
                 });
@@ -3287,9 +3408,6 @@
 
         });
     </script>
-
-    <!-- 2026 리뉴얼 -->
-    <script type="text/javascript" src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </body>
 
 </html>
