@@ -81,6 +81,7 @@ html.layer_open body {
 	background-color: transparent;
 	width: auto;
 	max-width: 22%;
+	min-width: 16%;
 }
 
 .lnb_list>ul>li::after {
@@ -90,9 +91,9 @@ html.layer_open body {
 .lnb_list>ul>li>a {
 	height: 100px;
 	color: #fff !important;
-	font-size: 17px;
+	font-size: 16px;
 	line-height: 1.4;
-	padding: 0;
+	padding: 0 12px;
 }
 
 .lnb_list li:hover .menu {
@@ -107,6 +108,7 @@ html.layer_open body {
 	height: calc(var(--sub-maxLength) * 30px + 60px);
 }
 .lnb_list .has_menu .sub ul li a {
+	font-size: 14px;
 	line-height: 30px;
 	padding-bottom: 0;
 }
@@ -705,6 +707,10 @@ article.section_bg .thum_wrap {
 	}
 	.lecBanner .swiper-button-prev {
 		left: -20px;
+	}
+
+	.lnb_list .has_menu .sub ul li a {
+		font-size: 12px;
 	}
 }
 
