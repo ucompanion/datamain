@@ -214,14 +214,14 @@ admin = (function ($) {
             //$("html").addClass("layeropens");
             //target.addClass("active").css("top", tops + scroll );
             target.addClass("active");
-            $('html, body').addClass('layer_open');
+            $('html, body').addClass('layer_open'); // 2026 메인리뉴얼 - 스크롤처리 변경
 
         },
 
         layerClose: function (element) {
             //$("html").removeClass("layeropens");
             $('.layer_wrap').removeClass("active");
-            $('html, body').removeClass('layer_open');
+            $('html, body').removeClass('layer_open'); // 2026 메인리뉴얼 - 스크롤처리 변경
 
         },
 
@@ -534,7 +534,7 @@ var mlpfn = {
     }
 }
 
-// 2026 메인리뉴얼
+// 2026 메인리뉴얼 - 목록더보기 추가
 function setListMore(btn){
     var clsName = 'is-expanded';
     var $more = $(btn).parent();
