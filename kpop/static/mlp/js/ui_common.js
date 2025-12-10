@@ -360,12 +360,25 @@ admin = (function ($) {
             }
         },
 
+        // 메뉴 최대 li 갯수 계산
+        setMaxMenulist: function() {
+            var $subMenuLi = $('.lnb_wrap .lnb_list .sub');
+            var maxCount = 0;
+            $subMenuLi.each(function () {
+                var count = $(this).find('li').length;
+                if (count > maxCount) maxCount = count;
+            });
+
+            // CSS 변수로 전달
+            document.documentElement.style.setProperty('--sub-maxLength', maxCount);
+        },
 
         init: function () {
             //common.layerOpen
             common.getCalenPick(),
             common.fileUpload();
             common.setLocation();
+            common.setMaxMenulist();
         }
 
     };
@@ -414,11 +427,32 @@ admin = (function ($) {
         $(".scroll_talk").on('click mouseover', function () {
             $('.scroll_talk').toggleClass('active');
             $('.show_talk').toggleClass('active');
+
+            setTimeout(function(){
+                if ($('.show_talk').hasClass('active')) {
+                    const el = document.querySelector(".show_talk");
+                    const baseHeight = 456;
+                    const safeTop = 20;
+
+                    // 1. 높이를 초기화해서 정확한 top을 측정
+                    el.style.height = `${baseHeight}px`;
+
+                    // 2. 초기 top 값 측정
+                    const currentTop = el.getBoundingClientRect().top;
+
+                    // 3. 부족분 계산
+                    let shortage = safeTop - currentTop;
+                    if (shortage < 0) shortage = 0;
+
+                    // 4. 최종 height 적용
+                    el.style.height = `${baseHeight - shortage}px`;
+                }
+            }, 0);
         })
 
-        $('.show_talk').on('click', function () {
-            //$('.show_talk').toggleClass('active');
-        })
+        // $('.show_talk').on('click', function () {
+        //     $('.show_talk').toggleClass('active');
+        // })
 
         //맨위로가기
         $(".scroll_top button").click(function () {
@@ -532,15 +566,4 @@ var mlpfn = {
         s = ('0' + s).slice(-2);
         return h + ':' + m + ':' + s;
     }
-}
-
-// 2026 메인리뉴얼 - 목록더보기 추가
-function setListMore(btn){
-    var clsName = 'is-expanded';
-    var $more = $(btn).parent();
-    var $list = $more.prev();
-
-    $more.toggleClass(clsName);
-    $list.toggleClass(clsName);
-
 }
