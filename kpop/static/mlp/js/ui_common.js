@@ -410,9 +410,8 @@ admin = (function ($) {
 
         });
 
-
         //scroll
-        $('.wrap').on('scroll', function () {
+        $(window).on('scroll', function () {
             var $win_scroll = $(this).scrollTop();
             $('.wrap > header:not(.make)').addClass('fixed');
             $(".scroll_top").show();
