@@ -805,6 +805,36 @@
                                     </a>
                                 </div>
                             </div>
+                            <div class="swiper-slide">
+                                <div class="item_wrap">
+                                    <a href="/courses?category=cat55">
+                                        <!--<img class="icon" src="/static/mlp/img/007-07.png" alt="카테고리">-->
+                                        <i class="icon_08" style="background-image:url(./static/mlp/img/008-08.png)"></i>
+                                        <p class="tit">카테고리</p>
+                                        <!-- <p class="stext"><span class="num">8</span>강좌</p> -->
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="item_wrap">
+                                    <a href="/courses?category=cat55">
+                                        <!--<img class="icon" src="/static/mlp/img/007-07.png" alt="카테고리">-->
+                                        <i class="icon_08" style="background-image:url(./static/mlp/img/008-08.png)"></i>
+                                        <p class="tit">카테고리</p>
+                                        <!-- <p class="stext"><span class="num">8</span>강좌</p> -->
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="item_wrap">
+                                    <a href="/courses?category=cat55">
+                                        <!--<img class="icon" src="/static/mlp/img/007-07.png" alt="카테고리">-->
+                                        <i class="icon_08" style="background-image:url(./static/mlp/img/008-08.png)"></i>
+                                        <p class="tit">카테고리</p>
+                                        <!-- <p class="stext"><span class="num">8</span>강좌</p> -->
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="swiper-button-next"></div>
@@ -818,35 +848,67 @@
                 // var mySwiper2 = undefined;
                 var mMenu = undefined;
 
+                // 20251212 centeredSlidesBounds 기능 추가
+                function applyCenterBounds(swiper) {
+                    console.log(swiper);
+                    const wrapper = swiper.wrapperEl;
+                    const slides = Array.from(swiper.slides);
+                    const containerWidth = swiper.width;
+
+                    // wrapper 실제 총 폭 계산
+                    let totalWidth = 0;
+                    slides.forEach(slide => {
+                        totalWidth += slide.offsetWidth;
+                    });
+
+                    // 남는 공간
+                    const gap = containerWidth - totalWidth;
+
+                    if (gap > 0) {
+                        // 남는 공간 → 가운데 정렬
+                        wrapper.classList.add("centered");
+                        swiper.allowTouchMove = false; // 스와이프 잠금 (원하면)
+                    } else {
+                        // 넘칠 때 → 기본(좌측)
+                        wrapper.classList.remove("centered");
+                        swiper.allowTouchMove = true; // 스와이프 가능
+                    }
+                }
                 function initSwiper() {
                     mySwiper = new Swiper(".lecBanner .swiper", {
-                        slidesPerView: 8,
+                        slidesPerView: 10,
                         navigation: {
                             nextEl: ".swiper-button-next",
                             prevEl: ".swiper-button-prev",
                         },
-                        loof: true,
+                        loop: false,
                         autoplay: false,
+                        resistanceRatio: 0,
                         breakpoints: {
-                            // 화면의 넓이가 320px 이상일 때
                             359: {
                                 slidesPerView: 2,
-                                //centeredSlides: true,
                             },
-                            // 화면의 넓이가 640px 이상일 때
                             420: {
                                 slidesPerView: 3,
-                                //centeredSlides: true,
                             },
                             640: {
                                 slidesPerView: 4,
-                                //centeredSlides: true,
                             },
                             1160: {
-                                slidesPerView: 5,
-                                //centeredSlides: true,
+                                slidesPerView: 6,
                             },
                         },
+                        on: {
+                            init() {
+                                applyCenterBounds(this);
+                            },
+                            resize() {
+                                applyCenterBounds(this);
+                            },
+                            slideChange() {
+                                applyCenterBounds(this);
+                            },
+                        }
                     });
                 }
 

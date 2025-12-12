@@ -437,6 +437,13 @@ footer .container>div.ft_top {
 	justify-content: flex-start;
 	gap: 0;
 }
+.lecBanner .swiper-wrapper.centered {
+	justify-content: center;
+}
+
+.lecBanner .swiper-slide {
+	width: 70px;
+}
 .lecBanner .swiper-button-next {
 	display: block;
 	right: 0px;
