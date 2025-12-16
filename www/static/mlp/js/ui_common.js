@@ -458,7 +458,7 @@ admin = (function ($) {
             setTimeout(function(){
                 if ($('.show_talk').hasClass('active')) {
                     const el = document.querySelector(".show_talk");
-                    const baseHeight = 456;
+                    const baseHeight = 335;
                     const safeTop = 20;
 
                     // 1. 높이를 초기화해서 정확한 top을 측정
