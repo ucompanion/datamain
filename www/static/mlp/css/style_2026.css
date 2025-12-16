@@ -92,6 +92,7 @@ html.layer_open body {
 }
 
 .lnb_list .has_menu .sub {
+	padding-top: 30px;
 	padding-bottom: 30px;
 	bottom: 100%;
 }
@@ -133,6 +134,7 @@ html.layer_open body {
 }
 
 .lnb_list .has_menu .sub.wide {
+	width: auto;
 	height: calc(var(--sub-maxLength) * 30px + 60px);
 }
 .lnb_list .has_menu .sub ul li a {
@@ -866,6 +868,7 @@ article.section_bg .thum_wrap {
 
 	.lnb_list .has_menu .sub ul li a {
 		font-size: 12px;
+		letter-spacing: -1px;
 	}
 }
 
