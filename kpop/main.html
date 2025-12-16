@@ -41,7 +41,7 @@
 </head>
 
 <body>
-    <div class="wrap">
+    <div class="wrap index_wrap">
         <!-- s:header -->
         <div class="header_wrap">
 
@@ -491,22 +491,6 @@
                     $(".lnb_list > ul > li > .gnb_sub").stop().slideUp(100, "easeInOutCubic");
                     $(".sub_bg").stop().slideUp(200, "easeInOutCubic");
                 });
-
-                $(".wrap").on("scroll", function () {
-                    var $win_scroll = $(this).scrollTop();
-
-                    $(".mq_wrap").addClass("show");
-                    $(".btn_top").addClass("show");
-
-                    if ($win_scroll <= 100) {
-                        $(".mq_wrap").removeClass("show");
-                        $(".btn_top").removeClass("show");
-                    }
-                });
-                //맨위로가기
-                $(".btn_top").on("click", function () {
-                    $(".wrap").animate({ scrollTop: 0 }, 200);
-                });
             });
         </script>
 
@@ -850,7 +834,6 @@
 
                 // 20251212 centeredSlidesBounds 기능 추가
                 function applyCenterBounds(swiper) {
-                    console.log(swiper);
                     const wrapper = swiper.wrapperEl;
                     const slides = Array.from(swiper.slides);
                     const containerWidth = swiper.width;

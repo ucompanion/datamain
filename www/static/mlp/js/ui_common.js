@@ -212,16 +212,14 @@ admin = (function ($) {
 
 
             //$("html").addClass("layeropens");
+            target.addClass("active").css("top", tops + scroll)
             //target.addClass("active").css("top", tops + scroll );
-            target.addClass("active");
-            $('html, body').addClass('layer_open'); // 2026 메인리뉴얼 - 스크롤처리 변경
 
         },
 
         layerClose: function (element) {
             //$("html").removeClass("layeropens");
             $('.layer_wrap').removeClass("active");
-            $('html, body').removeClass('layer_open'); // 2026 메인리뉴얼 - 스크롤처리 변경
 
         },
 
@@ -411,17 +409,21 @@ admin = (function ($) {
 
         });
 
+
         //scroll
         function winScroll($win_scroll){
             if ($win_scroll <= 100) {
                 $('.wrap > header:not(.make)').removeClass('fixed');
                 $('.show_talk').removeClass('active');
                 $(".scroll_top").hide();
+                $(".btn_top").hide();
+                $(".mq_wrap").removeClass("show");
             } else {
                 $('.wrap > header:not(.make)').addClass('fixed');
+                $(".mq_wrap").addClass("show");
                 $(".scroll_top").show();
+                $(".btn_top").show();
             }
-            return false;
         }
         if (hasIndexLength) {
             $(window).on('scroll', function () {
@@ -434,6 +436,20 @@ admin = (function ($) {
                 winScroll($win_scroll);
             });
         }
+
+        //맨위로가기
+        $(".btn_top").on("click", function () {
+            if (hasIndexLength) {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 200);
+            } else {
+                $(".wrap").animate({
+                    scrollTop: 0
+                }, 200);
+                return false;
+            }
+        });
 
         $(".scroll_talk").on('click mouseover', function () {
             $('.scroll_talk').toggleClass('active');
@@ -462,7 +478,7 @@ admin = (function ($) {
         })
 
         // $('.show_talk').on('click', function () {
-        //     $('.show_talk').toggleClass('active');
+            //$('.show_talk').toggleClass('active');
         // })
 
         //맨위로가기
@@ -535,52 +551,3 @@ $(window).resize(function () {
 		$("html").removeClass("mobile").addClass("pc");
     }
 });
-
-var mlpfn = {
-    open_course : function(url, _self='false'){
-        if(_self == 'true' || _self == 'True'){
-            window.open(url);
-        }else{
-            location.href = url;
-        }
-    },
-    set_course_level : function(ul){
-        $.each($(ul), function(idx, item){
-            let el = $(item.children[0]);
-            if(el.text().includes('난이도')){
-                str = $(item.children[0]).text();
-                str = str.replace('0', '입문');
-                str = str.replace('1', '초급');
-                str = str.replace('2', '중급');
-                str = str.replace('3', '고급');
-                str = str.replace('4', '심화');
-                el.text(str);
-            }
-        });
-    },
-    tz : new Date().getTimezoneOffset(),
-    utc2kst(date_str){
-        return new Date(new Date(date_str).getTime() - (mlpfn.tz*60000));
-    },
-    format_date : function(d=new Date(), df='yyyy-MM-dd HH:mm:ss') {
-        // TODO support df(date format)
-        return mlpfn.getYmd(d) +' '+ mlpfn.getTime(d);
-    },
-    getYmd : function (d) { //날짜 정보
-        var y = d.getFullYear();
-        var m = d.getMonth()+1;
-        var dd = d.getDate();
-        m  = ('0' + m ).slice(-2);
-        dd = ('0' + dd).slice(-2);
-        return y + '-' + m + '-' + dd;
-    },
-    getTime : function (d) { // 시간정보
-        var h = d.getHours();
-        var m = d.getMinutes();
-        var s = d.getSeconds();
-        h = ('0' + h).slice(-2);
-        m = ('0' + m).slice(-2);
-        s = ('0' + s).slice(-2);
-        return h + ':' + m + ':' + s;
-    }
-}
