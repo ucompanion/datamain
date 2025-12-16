@@ -1009,7 +1009,7 @@ article.section_bg .thum_wrap {
 		color: #555;
 		font-size: 16px;
 		font-style: normal;
-		font-weight: 400;
+		font-weight: 500 !important;
 		line-height: 100%;
 	}
 	.lnbm_wrap .mobile_list .show>.menu {

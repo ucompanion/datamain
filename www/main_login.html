@@ -822,14 +822,24 @@
 					} else {
 					}
 				});
-				// 2026 메인리뉴얼 - 모바일토글메뉴 속도빠르게
+				// 2026 메인리뉴얼 - 모바일토글메뉴 속도빠르게/로직수정
 				// 모바일 menu
-				$(".has_menu.dep2").on("click", function () {
-					$(".has_menu.dep2").removeClass("show");
-					$(".has_menu.dep2 .sub").slideUp('fast');
-					$(this).find(".sub").slideDown('fast');
-					$(this).addClass("show");
-				});
+                $(".has_menu.dep2").on("click", function () {
+                    var $this = $(this);
+                    var $sub = $this.find(".sub");
+
+                    if ($this.hasClass("show") && $sub.is(":visible")) {
+                        // 이미 열려있으면 닫기
+                        $sub.slideUp('fast');
+                        $this.removeClass("show");
+                    } else {
+                        // 닫혀있으면 다른 메뉴 닫고, 자신은 열기
+                        $(".has_menu.dep2").removeClass("show");
+                        $(".has_menu.dep2 .sub").slideUp('fast');
+                        $sub.slideDown('fast');
+                        $this.addClass("show");
+                    }
+                });
 				$(".btn_menu").on("click", function () {
 					//$(".overlay").show();
 					$(".lnbm_wrap").show();
