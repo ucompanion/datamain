@@ -1,5 +1,6 @@
 /* -------------------- Common -------------------- */
 html, body {
+	font-size: 15px;
 	transform: none;
 	overflow: initial !important;
 	height: auto;
@@ -30,7 +31,7 @@ html.layer_open body {
 
 .inner_wrap {
 	width: 100%;
-	max-width: 1260px;
+	max-width: min(1260px, calc(100% - 160px));
 }
 
 /* -------------------- Layout -------------------- */
@@ -95,6 +96,7 @@ html.layer_open body {
 	padding-top: 30px;
 	padding-bottom: 30px;
 	bottom: 100%;
+	left: 0	;
 }
 
 .lnb_list>ul {
@@ -123,6 +125,7 @@ html.layer_open body {
 	font-size: 16px;
 	line-height: 1.4;
 	padding: 0 12px;
+	word-break: keep-all;
 }
 
 .lnb_list li:hover .menu {
@@ -134,13 +137,14 @@ html.layer_open body {
 }
 
 .lnb_list .has_menu .sub.wide {
-	width: auto;
+	width: 100%;
 	height: calc(var(--sub-maxLength) * 30px + 60px);
 }
 .lnb_list .has_menu .sub ul li a {
 	font-size: 14px;
 	line-height: 30px;
 	padding-bottom: 0;
+	text-align: center;
 }
 .lnb_list .has_menu .sub ul li a:hover {
 	color: #EF6492;
@@ -466,13 +470,13 @@ footer .container>div.ft_top {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: var(--innerHeight);
+	height: calc(var(--innerHeight) - 100px);
 }
 .wrap .vs_wrap > img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	object-position: center center;
+	object-position: bottom center;
 }
 
 .vs_wrap .inner_wrap {
@@ -588,15 +592,19 @@ footer .container>div.ft_top {
 .cus_wrap {
 	width: 100%;
 }
-.stit_wrap .text_more {
+.stit_wrap .text_more, .cus_wrap .title .text_more {
 	flex: none;
+	font-size: 15px;
+	color: #848484 !important;
+}
+.stit_wrap .text_more:hover, .cus_wrap .title .text_more:hover {
+	color: #2d2d2d !important;
 }
 
 .cus_wrap .title .t,
 .stit_wrap .t {
 	font-weight: 700;
 	font-size: 1.6rem;
-	line-height: 1.4;
 }
 
 .common-tab .tab-btn {
@@ -615,7 +623,7 @@ footer .container>div.ft_top {
 	flex: none;
 	height: 50px;
 	width: auto;
-	/* min-width: 140px; */
+	min-width: 140px;
 	max-width: none;
 	padding: 0 12px;
 	border: 0;
@@ -649,20 +657,24 @@ footer .container>div.ft_top {
 .box_list {
 	gap: 40px 20px;
 }
-.box_list li {
+.box_list > li {
 	width: calc(25% - 15px) !important;
 }
-.box_list li .tt {
+.box_list > li a {
+	cursor: pointer;
+}
+.box_list > li .tt {
 	padding: 0;
 	font-size: 1.13rem;
 	color: #232323;
+	font-weight: 500;
 }
-.box_list li .box_thum {
+.box_list > li .box_thum {
     overflow: hidden;
     aspect-ratio: 296 / 167;
 	margin-bottom: 20px;
-}
-.box_list li .box_thum img {
+    border-radius: 20px;
+    overflow: hidden;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -670,11 +682,11 @@ footer .container>div.ft_top {
 }
 .box_list.hover-linded li a:focus .box_thum,
 .box_list.hover-linded li a:hover .box_thum {
-	outline: 3px solid var(--primary);
+	outline: 3px solid #319ffd;
 	outline-offset: -3px;
 }
 
-.box_list li .box_thum ~ .info {
+.box_list > li .box_thum ~ .info {
 	margin-top: 16px;
 	color: #555;
 	font-size: 14px;
@@ -691,6 +703,7 @@ article.section_bg .thum_wrap {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+	border-radius: 18px;
 
 }
 .thum_wrap .title {
@@ -1076,10 +1089,11 @@ article.section_bg .thum_wrap {
 
 	.wrap .vs_wrap {
 		align-items: flex-end;
+		height: calc(var(--innerHeight) - 80px);
 	}
 
 	.wrap .vs_wrap > img {
-		object-position: center right;
+		object-position: top center;
 	}
 
 	.vs_wrap .inner_wrap {
@@ -1139,10 +1153,10 @@ article.section_bg .thum_wrap {
 	.box_list {
 		gap: 40px 12px;
 	}
-	.box_list li {
+	.box_list > li {
 		width: calc(25% - 9px) !important;
 	}
-	.box_list li .box_thum {
+	.box_list > li .box_thum {
 		margin-bottom: 14px;
 	}
 
@@ -1162,7 +1176,7 @@ article.section_bg .thum_wrap {
 	/* .common-tab .tab-btn > span {
 		min-width: auto;
 	} */
-	.box_list li {
+	.box_list > li {
 		width: calc(50% - 6px) !important;
 	}
 }
@@ -1180,7 +1194,7 @@ article.section_bg .thum_wrap {
 }
 
 @media only screen and (max-width: 359px) {
-	.box_list li {
+	.box_list > li {
 		width: 100% !important;
 	}
 
@@ -1191,7 +1205,7 @@ article.section_bg .thum_wrap {
 }
 
 @media (hover: none) and (pointer: coarse) {
-	.box_list li a:hover .thum_wrap {
+	.box_list > li a:hover .thum_wrap {
 		display: none;
 	}
 }

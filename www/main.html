@@ -355,7 +355,7 @@
 									</ul>
 								</div>
 							</li>
-							<li>
+							<li class="has_menu dep2">
 								<a href="/gw/mslearn" class="menu">MS Learn</a>
 								<div class="sub wide">
 									<ul>
@@ -748,14 +748,24 @@
 					} else {
 					}
 				});
-				// 2026 메인리뉴얼 - 모바일토글메뉴 속도빠르게
+				// 2026 메인리뉴얼 - 모바일토글메뉴 속도빠르게/로직수정
 				// 모바일 menu
-				$(".has_menu.dep2").on("click", function () {
-					$(".has_menu.dep2").removeClass("show");
-					$(".has_menu.dep2 .sub").slideUp('fast');
-					$(this).find(".sub").slideDown('fast');
-					$(this).addClass("show");
-				});
+                $(".has_menu.dep2").on("click", function () {
+                    var $this = $(this);
+                    var $sub = $this.find(".sub");
+
+                    if ($this.hasClass("show") && $sub.is(":visible")) {
+                        // 이미 열려있으면 닫기
+                        $sub.slideUp('fast');
+                        $this.removeClass("show");
+                    } else {
+                        // 닫혀있으면 다른 메뉴 닫고, 자신은 열기
+                        $(".has_menu.dep2").removeClass("show");
+                        $(".has_menu.dep2 .sub").slideUp('fast');
+                        $sub.slideDown('fast');
+                        $this.addClass("show");
+                    }
+                });
 				$(".btn_menu").on("click", function () {
 					//$(".overlay").show();
 					$(".lnbm_wrap").show();
@@ -925,11 +935,11 @@
             <div class="vs_wrap">
                 <img src="./static/mlp/img/vs-bnr-001.png" alt="" class="pc_only" />
                 <img src="./static/mlp/img/vs-bnr-001-mo.png" alt="" class="mo_only" />
-                <div class="inner_wrap">
+                <!-- <div class="inner_wrap">
                     <h1 class="vs_tit">Microsoft Elevate</h1>
                     <p class="vs_txt">지속 가능한 디지털 혁신, 지금 시작하세요. <br>Microsoft Elevate와 함께 미래를 설계하세요.</p>
                     <a href="#" target="_blank" class="vs_btn">바로가기</a>
-                </div>
+                </div> -->
             </div>
 
 
