@@ -472,7 +472,7 @@ admin = (function ($) {
                     if (shortage < 0) shortage = 0;
 
                     // 4. 최종 height 적용
-                    el.style.height = `${baseHeight - shortage}px`;
+                    el.style.maxHeight = `${baseHeight - shortage}px`;
                 }
             }, 0);
         })

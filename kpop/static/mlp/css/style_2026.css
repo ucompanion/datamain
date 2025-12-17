@@ -1,8 +1,10 @@
 /* -------------------- Common -------------------- */
 html, body {
+	font-size: 15px;
 	transform: none;
 	overflow: initial !important;
 	height: auto;
+	word-break: keep-all;
 }
 html.layer_open,
 html.layer_open body {
@@ -495,6 +497,9 @@ footer .container>div.ft_top {
 	gap: 14px;
 	margin-bottom: 30px;
 }
+.common-tab .tab-btn::-webkit-scrollbar {
+  display: none;
+}
 .common-tab .tab-btn:before {
 	display: none;
 }
@@ -800,7 +805,7 @@ article.section_bg .thum_wrap {
 		max-width: calc(100% - 40px);
 	}
 	.show_talk {
-		height: 436px;
+		height: auto;
 		right: 20px;
 		bottom: 220px;
 	}
