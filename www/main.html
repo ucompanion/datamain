@@ -9068,8 +9068,12 @@
 				var LayerPopup = $(".layer_wrap.alarm, .show_talk, .scroll_talk");
 				if (LayerPopup.has(e.target).length === 0) {
 					LayerPopup.removeClass("active");
+					// $(".scroll_talk").removeClass("active");
 				}
 			});
+            // $(".show_talk .pf_clise").on("click", function () {
+            //     $(".show_talk").removeClass("active");
+            // });
 		};
 
 		$(function () {

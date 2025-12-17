@@ -213,7 +213,12 @@ admin = (function ($) {
 
             //$("html").addClass("layeropens");
             //target.addClass("active").css("top", tops + scroll );
-            target.addClass("active");
+            if ($('.index_wrap').length) {
+                target.addClass("active");
+            } else {
+                target.addClass("active").css("top", tops + scroll );
+            }
+
             $('html, body').addClass('layer_open'); // 2026 메인리뉴얼 - 스크롤처리 변경
 
         },

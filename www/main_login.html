@@ -644,6 +644,56 @@
 				</div>
 			</div>
 		</div>
+        <script>
+            var alarm_func = {
+                showAlarm: function () {
+                    $(".alarm_header button").removeClass("ic_new");
+                    //$(".boxing").removeClass('active');
+                    $(".overlay").css('display', 'none');
+                    admin.layerOpen('.layer_wrap.alarm');
+
+                    let li_arr = new Array();
+                    $(".layer_wrap.alarm .al_li").each(function () {
+                        li_arr.push($(this).data('id'))
+                    });
+
+                    if (li_arr.length > 0) {
+                        alarm_func.updateAlarm(li_arr, 1)
+                    }
+                },
+                closeAlarm: function () {
+                    $(".window-wrap.wrap").removeClass('block');
+                    $(".window-wrap.wrap").css('overflow-y', 'auto');
+                    $(".al_txt .text").addClass('read')
+                    admin.layerClose();
+                },
+                updateAlarm: function (data, status) {
+                    $.post(
+                        '/alarm/alarmStatus',
+                        {
+                            event_data: String(data),
+                            status: status,
+                            csrfmiddlewaretoken: "SObPVgRiOVFNuIDd2qI7uwnPyLd1V3QhryPrXx2Kin3Ws8Z5cawj8oIOotJOz95S"
+                        },
+                    )
+                        .success(function (res) {
+                            if (res.status != "1") {
+                                alert("오류가 발생하였습니다.\n잠시후 다시 시도해주세요.");
+                            }
+                        })
+                        .error(function () {
+                            alert("오류가 발생하였습니다.\n잠시후 다시 시도해주세요.");
+                        });
+                },
+                removeAlarm: function (data) {
+                    alarm_func.updateAlarm($(data).parents('li').data('id'), 2)
+                    $(data).parents('li').remove();
+                    if ($(".al_li").length == 0) {
+                        $(".al_status").css('display', 'block');
+                    }
+                }
+            }
+        </script>
 		<!-- 알림창 E -->
 
 		<!-- 가입안내창 S -->
@@ -9142,8 +9192,12 @@
 				var LayerPopup = $(".layer_wrap.alarm, .show_talk, .scroll_talk");
 				if (LayerPopup.has(e.target).length === 0) {
 					LayerPopup.removeClass("active");
+					// $(".scroll_talk").removeClass("active");
 				}
 			});
+            // $(".show_talk .pf_clise").on("click", function () {
+            //     $(".show_talk").removeClass("active");
+            // });
 		};
 
 		$(function () {

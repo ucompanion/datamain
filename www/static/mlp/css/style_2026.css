@@ -35,6 +35,10 @@ html.layer_open body {
 	max-width: min(1260px, calc(100% - 160px));
 }
 
+.layer_wrap {
+	overscroll-behavior-y: none;
+}
+
 /* -------------------- Layout -------------------- */
 /* Header */
 .header_wrap {

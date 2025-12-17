@@ -59,7 +59,7 @@ function pc() {
     $(".global-header:not(.make).etc").remove();
     $("header:not(.make) .boxing").removeClass("active");
     $(".wrap").css("overflow-y", "auto").removeClass('block');
-    $("header:not(.make) .overlay").css("display", "none")
+    $("header:not(.make) .overlay").css("display", "none");
     var obj = $(".pc .nav_b nav");
     obj.find(" .on").removeClass("on");
     obj.find(" .open").removeClass("open");
@@ -169,23 +169,18 @@ function mobile() {
         })
     });
 
-
     //메뉴 열기
     $("header:not(.make) .bt_menu").on("click", (function () {
         $("header:not(.make) .boxing").addClass("active");
         $(".wrap").css("overflow-y", "hidden").addClass("block");
-        $("header:not(.make) .overlay").css("display", "block")
-
+        $("header:not(.make) .overlay").css("display", "block");
     }));
     //메뉴 닫기
     $(" header:not(.make) .overlay").on("click", (function () {
         $("header:not(.make) .boxing").removeClass("active");
         $(".wrap").css("overflow-y", "auto").removeClass('block');
-        $("header:not(.make) .overlay").css("display", "none")
-
+        $("header:not(.make) .overlay").css("display", "none");
     }));
-
-
 }
 
 
@@ -212,15 +207,18 @@ admin = (function ($) {
 
 
             //$("html").addClass("layeropens");
-            target.addClass("active").css("top", tops + scroll)
-            //target.addClass("active").css("top", tops + scroll );
-
+            if ($('.index_wrap').length) {
+                target.addClass("active");
+            } else {
+                target.addClass("active").css("top", tops + scroll );
+            }
+            $('html, body').addClass('layer_open'); // 2026 메인리뉴얼 - 스크롤처리 변경
         },
 
         layerClose: function (element) {
             //$("html").removeClass("layeropens");
             $('.layer_wrap').removeClass("active");
-
+            $('html, body').removeClass('layer_open'); // 2026 메인리뉴얼 - 스크롤처리 변경
         },
 
         getCalenPick : function(){
@@ -451,7 +449,9 @@ admin = (function ($) {
             }
         });
 
-        $(".scroll_talk").on('click mouseover', function () {
+        $(".scroll_talk").off('click mouseover').on('click', function (e) {
+            e.stopPropagation(); // 이벤트 전파 차단
+
             $('.scroll_talk').toggleClass('active');
             $('.show_talk').toggleClass('active');
 
