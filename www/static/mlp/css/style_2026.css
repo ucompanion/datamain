@@ -725,6 +725,7 @@ article.section_bg .thum_wrap {
 .thum_wrap .title {
 	flex: none;
 	font-size: 1.07rem;
+	height: auto;
 }
 
 .thum_wrap .cont_scroll {
