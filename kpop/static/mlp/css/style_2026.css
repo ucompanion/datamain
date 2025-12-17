@@ -337,7 +337,7 @@ footer .container>div.ft_top {
 	position: fixed;
 	right: 30px;
 	bottom: 250px;
-	height: 456px;
+	height: auto;
 }
 .scroll_talk {
 	position: fixed;
