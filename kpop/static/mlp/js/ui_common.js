@@ -446,7 +446,7 @@ admin = (function ($) {
                     const safeTop = 20;
 
                     // 1. 높이를 초기화해서 정확한 top을 측정
-                    el.style.height = `${baseHeight}px`;
+                    el.style.maxHeight = `${baseHeight}px`;
 
                     // 2. 초기 top 값 측정
                     const currentTop = el.getBoundingClientRect().top;
