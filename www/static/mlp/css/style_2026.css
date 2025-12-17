@@ -155,7 +155,7 @@ html.layer_open body {
 .lnb_wrap .sub_bg {
 	top: auto;
 	bottom: 100px;
-	height: calc(var(--sub-maxLength) * 30px + 60px);
+	height: calc(var(--sub-maxLength) * 30px + 60px) !important;
 	opacity: 0.97;
 	box-shadow: 0 -6px 12px rgba(0, 0, 0, 0.05);
 }

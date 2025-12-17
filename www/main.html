@@ -779,14 +779,15 @@
 					$("html").removeClass("menu_open");
 				});
 
-				// 2026 메인리뉴얼 - fade()를 slideDown()으로 변경하여 통일하기
+				// 2026 메인리뉴얼 - fade()를 slideDown()으로 변경하여 통일하기/이벤트 영역 수정
 				//header menu
 				let subHideTimer = null;
-				$(".lnb_list > ul > li > a").mouseenter(function () {
+				$(".lnb_list, .lnb_list > ul > li > a, .lnb_wrap .sub_bg").mouseenter(function () {
+					clearTimeout(subHideTimer);
 					$(".lnb_list .sub").stop().slideDown(200, "easeInOutCubic");
 					$(".lnb_wrap .sub_bg").stop().slideDown(200, "easeInOutCubic");
 				});
-				$(".lnb_list").mouseleave(function () {
+				$(".lnb_list, .lnb_wrap .sub_bg").mouseleave(function () {
 					subHideTimer = setTimeout(function () {
 						$(".lnb_list > ul > li > .sub").stop().slideUp(200, "easeInOutCubic");
 						$(".sub_bg").stop().slideUp(200, "easeInOutCubic");
@@ -800,7 +801,6 @@
 					$(".lnb_list > ul > li > .gnb_sub").stop().slideUp(100, "easeInOutCubic");
 					$(" .sub_bg").stop().slideUp(200, "easeInOutCubic");
 				});
-
 			});
 		</script>
 
