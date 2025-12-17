@@ -440,7 +440,9 @@ admin = (function ($) {
             });
         }
 
-        $(".scroll_talk").on('click mouseover', function () {
+        $(".scroll_talk").off('click mouseover').on('click', function (e) {
+            e.stopPropagation(); // 이벤트 전파 차단
+
             $('.scroll_talk').toggleClass('active');
             $('.show_talk').toggleClass('active');
 

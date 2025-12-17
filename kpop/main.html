@@ -3099,7 +3099,7 @@
         // 바닥화면 클릭하면 팝업레이어 닫힘
         var closeQuick = function () {
             $("html").mouseup(function (e) {
-                var LayerPopup = $(".show_talk");
+                var LayerPopup = $(".layer_wrap.alarm, .show_talk, .scroll_talk");
                 if (LayerPopup.has(e.target).length === 0) {
                     LayerPopup.removeClass("active");
                     $(".scroll_talk").removeClass("active");
