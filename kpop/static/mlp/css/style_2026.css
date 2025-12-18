@@ -375,7 +375,7 @@ footer .container>div.ft_top {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: var(--innerHeight);
+	height: calc(var(--innerHeight) - 100px);
 }
 .wrap .vs_wrap > img {
 	width: 100%;
@@ -947,6 +947,7 @@ article.section_bg .thum_wrap {
 
 	.wrap .vs_wrap {
 		align-items: flex-end;
+		height: calc(var(--innerHeight) - 80px);
 	}
 
 	.wrap .vs_wrap > img {
